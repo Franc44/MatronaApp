@@ -10,8 +10,8 @@ export async function authSession(session) {
 		},
 		body: JSON.stringify(session)
 	})
-	const data = await resp.json()
-	console.log(data);
+	const data = await resp.text()
+	//console.log(data);
 	
   return {data: data, status: resp.status}
 }
@@ -29,8 +29,8 @@ export async function getUsuarios() {
 				username : usuario.idUsuario,
 				correo : usuario.correoUsu,
 				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
+				id : usuario.idUsuTabla,
+				fecha : usuario.fechaUsu
 			}
 		}
 	)
@@ -49,8 +49,8 @@ export async function getUsuariobyId(id) {
 				username : usuario.idUsuario,
 				correo : usuario.correoUsu,
 				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
+				id : usuario.idUsuTabla,
+				fecha : usuario.fechaUsu
 			}
 		}
 	)
@@ -279,15 +279,13 @@ export async function getCentroM() {
 	const data = await resp.json()
 	
  	return data.map(
-		usuario => {
-			return {
-				username : usuario.idUsuario,
-				correo : usuario.correoUsu,
-				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
-			}
-		}
+		centroM => {
+  			return{
+	  			idcentro : centroM.idCentro1,
+	  			idmatrona : centroM.idMatrona1,
+	  			idCm : centroM.idCm
+  			}
+  		}
 	)
 }
 
@@ -298,17 +296,16 @@ export async function getCentroMbyId(id) {
 	})
 	const data = await resp.json()
 	
-  return data.map(
-		usuario => {
-			return {
-				username : usuario.idUsuario,
-				correo : usuario.correoUsu,
-				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
-			}
-		}
+  	return data.map(
+  		centroM => {
+  			return{
+	  			idcentro : centroM.idCentro1,
+	  			idmatrona : centroM.idMatrona1,
+	  			idCm : centroM.idCm
+  			}
+  		}
 	)
+
 }
 
 export async function addCentroM(user) {
@@ -366,13 +363,12 @@ export async function getAsistencias() {
 	const data = await resp.json()
 	
  	return data.map(
-		usuario => {
+		asistencia => {
 			return {
-				username : usuario.idUsuario,
-				correo : usuario.correoUsu,
-				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
+				idAsist : asistencia.idAsist,
+				descAsist : asistencia.descAsist,
+				fechaAsist : asistencia.fechaAsist,
+				idClase : asistencia.idClase2
 			}
 		}
 	)
@@ -386,13 +382,12 @@ export async function getAsistenciasbyId(id) {
 	const data = await resp.json()
 	
   return data.map(
-		usuario => {
+		asistencia => {
 			return {
-				username : usuario.idUsuario,
-				correo : usuario.correoUsu,
-				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
+				idAsist : asistencia.idAsist,
+				descAsist : asistencia.descAsist,
+				fechaAsist : asistencia.fechaAsist,
+				idClase : asistencia.idClase2
 			}
 		}
 	)
@@ -453,13 +448,12 @@ export async function getClases() {
 	const data = await resp.json()
 	
  	return data.map(
-		usuario => {
+		clase => {
 			return {
-				username : usuario.idUsuario,
-				correo : usuario.correoUsu,
-				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
+				idClase : clase.idClase,
+				descClase : clase.descClase,
+				horaClase : clase.horaClase,
+				duracionClase : clasei.duracionClase
 			}
 		}
 	)
@@ -473,13 +467,12 @@ export async function getClasesbyId(id) {
 	const data = await resp.json()
 	
   return data.map(
-		usuario => {
+		clase => {
 			return {
-				username : usuario.idUsuario,
-				correo : usuario.correoUsu,
-				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
+				idClase : clase.idClase,
+				descClase : clase.descClase,
+				horaClase : clase.horaClase,
+				duracionClase : clasei.duracionClase
 			}
 		}
 	)
@@ -540,13 +533,14 @@ export async function getEmbarazadas() {
 	const data = await resp.json()
 	
  	return data.map(
-		usuario => {
+		embarazada => {
 			return {
-				username : usuario.idUsuario,
-				correo : usuario.correoUsu,
-				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
+				idEmbarazada : embarazada.idEmbarazada,
+				nomEmbarazada : embarazada.nomEmbarazada,
+				dirEmbarazada : embarazada.dirEmbarazada,
+				semGest : embarazada.semGest,
+				numHijos : embarazada.numHijos,
+				telEmbarazada : embarazada.telEmbarazada
 			}
 		}
 	)
@@ -560,13 +554,14 @@ export async function getEmbarazadasbyId(id) {
 	const data = await resp.json()
 	
   return data.map(
-		usuario => {
+		embarazada => {
 			return {
-				username : usuario.idUsuario,
-				correo : usuario.correoUsu,
-				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
+				idEmbarazada : embarazada.idEmbarazada,
+				nomEmbarazada : embarazada.nomEmbarazada,
+				dirEmbarazada : embarazada.dirEmbarazada,
+				semGest : embarazada.semGest,
+				numHijos : embarazada.numHijos,
+				telEmbarazada : embarazada.telEmbarazada
 			}
 		}
 	)
@@ -627,13 +622,13 @@ export async function getMatronas() {
 	const data = await resp.json()
 	
  	return data.map(
-		usuario => {
+		matrona => {
 			return {
-				username : usuario.idUsuario,
-				correo : usuario.correoUsu,
-				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
+				idMatrona : matrona.idMatrona,
+				nomMatrona : matrona.nomMatrona,
+				telMatrona : matrona.telMatrona,
+				dirMatrona : matrona.dirMatrona,
+				horarioMatr : matrona.horarioMatr
 			}
 		}
 	)
@@ -647,13 +642,13 @@ export async function getMatronasbyId(id) {
 	const data = await resp.json()
 	
   return data.map(
-		usuario => {
+		matrona => {
 			return {
-				username : usuario.idUsuario,
-				correo : usuario.correoUsu,
-				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
+				idMatrona : matrona.idMatrona,
+				nomMatrona : matrona.nomMatrona,
+				telMatrona : matrona.telMatrona,
+				dirMatrona : matrona.dirMatrona,
+				horarioMatr : matrona.horarioMatr
 			}
 		}
 	)
@@ -714,13 +709,13 @@ export async function getCentros() {
 	const data = await resp.json()
 	
  	return data.map(
-		usuario => {
+		centro => {
 			return {
-				username : usuario.idUsuario,
-				correo : usuario.correoUsu,
-				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
+				idCentro : centro.idCentro,
+				telCentro : centro.telCentro,
+				dirCentro : centro.dirCentro,
+				numGym : centro.numGym,
+				salaEsp : centro.salaEsp
 			}
 		}
 	)
@@ -734,13 +729,13 @@ export async function getCentrosbyId(id) {
 	const data = await resp.json()
 	
   return data.map(
-		usuario => {
+		centro => {
 			return {
-				username : usuario.idUsuario,
-				correo : usuario.correoUsu,
-				tipo : usuario.tipoUsu,
-				id : idUsuTabla,
-				fecha : fechaUsu
+				idCentro : centro.idCentro,
+				telCentro : centro.telCentro,
+				dirCentro : centro.dirCentro,
+				numGym : centro.numGym,
+				salaEsp : centro.salaEsp
 			}
 		}
 	)

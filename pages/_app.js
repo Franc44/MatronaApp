@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
       const userid = localStorage.getItem('id');
       setUser({user: loggedUser, nombre: username, tipo : usertipo, id : userid})
     } else {
-      Router.push('/');
+      Router.push('/login');
     }
   }, [])
 
@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
   const signOut = () => {
     localStorage.clear();
     setUser({user: null, nombre: null, tipo : null, id : null})
-    Router.push('/');
+    Router.push('/login');
   }
 
   return (
