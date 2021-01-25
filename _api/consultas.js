@@ -1,7 +1,9 @@
 import fetch from 'isomorphic-fetch'
 
+const uri = 'http://192.168.0.11/api/Matronas/'
+
 export async function authSession(session) {
-  const url = 'https://192.168.2.8/api/Matronas/Usuario/Autenticacion'
+  const url = uri + 'Usuario/Autenticacion'
 	const resp = await fetch(url, {
 		method: 'POST',
 		credentials: "same-origin",
@@ -17,27 +19,33 @@ export async function authSession(session) {
 }
 
 export async function getUsuarios() {
-  const url = 'https://192.168.2.8/api/Matronas/Usuarios/'
+  const url = uri + 'Usuarios'
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
-	const data = await resp.json()
+
+	if(resp.ok) {
+		const data = await resp.json()
+
+		console.log(data);
 	
- 	return data.map(
-		usuario => {
-			return {
-				username : usuario.idUsuario,
-				correo : usuario.correoUsu,
-				tipo : usuario.tipoUsu,
-				id : usuario.idUsuTabla,
-				fecha : usuario.fechaUsu
+	 	return data.map(
+			usuario => {
+				return {
+					username : usuario.idUsuario,
+					correo : usuario.correoUsu,
+					tipo : usuario.tipoUsu,
+					id : usuario.idUsuTabla,
+					fecha : usuario.fechaUsu
+				}
 			}
-		}
-	)
+		)
+ 	}
+ 	return []
 }
 
 export async function getUsuariobyId(id) {
-  const url = 'https://192.168.2.8/api/Matronas/Usuario/' + id
+  const url = uri + 'Usuario/' + id
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -57,7 +65,7 @@ export async function getUsuariobyId(id) {
 }
 
 export async function addUsuario(user) {
-  const url = 'https://192.168.2.8/api/Matronas/Usuario/Agrega'
+  const url = uri + 'Usuario/Agrega'
 	const resp = await fetch(url, {
 		method: 'POST',
 		credentials: "same-origin",
@@ -73,7 +81,7 @@ export async function addUsuario(user) {
 }
 
 export async function modifyUsuario(user) {
-  const url = 'https://192.168.2.8/api/Matronas/Usuario/Actualiza/' + user.idUsuario
+  const url = uri + 'Usuario/Actualiza/' + user.idUsuario
 	const resp = await fetch(url, {
 		method: 'PUT',
 		credentials: "same-origin",
@@ -88,7 +96,7 @@ export async function modifyUsuario(user) {
 }
 
 export async function deleteUsuario(id) {
-  const url = 'https://192.168.2.8/api/Matronas/Usuario/Elimina/' + id
+  const url = uri + 'Usuario/Elimina/' + id
 	const resp = await fetch(url, {
 		method: 'DELETE',
 		credentials: "same-origin",
@@ -104,7 +112,7 @@ export async function deleteUsuario(id) {
 }
 
 export async function getClaseE() {
-  const url = 'https://192.168.2.8/api/Matronas/ClaseE/'
+  const url = uri + 'ClaseE/'
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -122,7 +130,7 @@ export async function getClaseE() {
 }
 
 export async function getClaseEbyId(id) {
-  const url = 'https://192.168.2.8/api/Matronas/ClaseE/' + id
+  const url = uri + 'ClaseE/' + id
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -140,7 +148,7 @@ export async function getClaseEbyId(id) {
 }
 
 export async function addClaseE(user) {
-  const url = 'https://192.168.2.8/api/Matronas/ClaseE/Agrega'
+  const url = uri + 'ClaseE/Agrega'
 	const resp = await fetch(url, {
 		method: 'POST',
 		credentials: "same-origin",
@@ -156,7 +164,7 @@ export async function addClaseE(user) {
 }
 
 export async function modifyClaseE(claseE) {
-  const url = 'https://192.168.2.8/api/Matronas/ClaseE/Actualiza/' + claseE.idEc
+  const url = uri + 'ClaseE/Actualiza/' + claseE.idEc
 	const resp = await fetch(url, {
 		method: 'PUT',
 		credentials: "same-origin",
@@ -171,7 +179,7 @@ export async function modifyClaseE(claseE) {
 }
 
 export async function deleteClaseE(id) {
-  const url = 'https://192.168.2.8/api/Matronas/ClaseE/Elimina/' + id
+  const url = uri + 'ClaseE/Elimina/' + id
 	const resp = await fetch(url, {
 		method: 'DELETE',
 		credentials: "same-origin",
@@ -188,7 +196,7 @@ export async function deleteClaseE(id) {
 
 
 export async function getCentroE() {
-  const url = 'https://192.168.2.8/api/Matronas/CentroE/'
+  const url = uri + 'CentroE/'
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -206,7 +214,7 @@ export async function getCentroE() {
 }
 
 export async function getCentroEbyId(id) {
-  const url = 'https://192.168.2.8/api/Matronas/CentroE/' + id
+  const url = uri + 'CentroE/' + id
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -224,7 +232,7 @@ export async function getCentroEbyId(id) {
 }
 
 export async function addCentroE(centroE) {
-  const url = 'https://192.168.2.8/api/Matronas/CentroE/Agrega'
+  const url = uri + 'CentroE/Agrega'
 	const resp = await fetch(url, {
 		method: 'POST',
 		credentials: "same-origin",
@@ -240,7 +248,7 @@ export async function addCentroE(centroE) {
 }
 
 export async function modifyCentroE(centroE) {
-  const url = 'https://192.168.2.8/api/Matronas/CentroE/Actualiza/' + centroE.idCe
+  const url = uri + 'CentroE/Actualiza/' + centroE.idCe
 	const resp = await fetch(url, {
 		method: 'PUT',
 		credentials: "same-origin",
@@ -255,7 +263,7 @@ export async function modifyCentroE(centroE) {
 }
 
 export async function deleteCentroE(id) {
-  const url = 'https://192.168.2.8/api/Matronas/CentroE/Elimina/' + id
+  const url = uri + 'CentroE/Elimina/' + id
 	const resp = await fetch(url, {
 		method: 'DELETE',
 		credentials: "same-origin",
@@ -272,7 +280,7 @@ export async function deleteCentroE(id) {
 
 
 export async function getCentroM() {
-  const url = 'https://192.168.2.8/api/Matronas/CentroM/'
+  const url = uri + 'CentroM/'
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -290,7 +298,7 @@ export async function getCentroM() {
 }
 
 export async function getCentroMbyId(id) {
-  const url = 'https://192.168.2.8/api/Matronas/CentroM/' + id
+  const url = uri + 'CentroM/' + id
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -309,7 +317,7 @@ export async function getCentroMbyId(id) {
 }
 
 export async function addCentroM(user) {
-  const url = 'https://192.168.2.8/api/Matronas/CentroM/Agrega'
+  const url = uri + 'CentroM/Agrega'
 	const resp = await fetch(url, {
 		method: 'POST',
 		credentials: "same-origin",
@@ -325,7 +333,7 @@ export async function addCentroM(user) {
 }
 
 export async function modifyCentroM(user) {
-  const url = 'https://192.168.2.8/api/Matronas/CentroM/Actualiza/' + user.idUsuario
+  const url = uri + 'CentroM/Actualiza/' + user.idUsuario
 	const resp = await fetch(url, {
 		method: 'PUT',
 		credentials: "same-origin",
@@ -340,7 +348,7 @@ export async function modifyCentroM(user) {
 }
 
 export async function deleteCentroM(id) {
-  const url = 'https://192.168.2.8/api/Matronas/CentroM/Elimina/' + id
+  const url = uri + 'CentroM/Elimina/' + id
 	const resp = await fetch(url, {
 		method: 'DELETE',
 		credentials: "same-origin",
@@ -356,7 +364,7 @@ export async function deleteCentroM(id) {
 }
 
 export async function getAsistencias() {
-  const url = 'https://192.168.2.8/api/Matronas/Asistencias/'
+  const url = uri + 'Asistencias/'
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -375,7 +383,7 @@ export async function getAsistencias() {
 }
 
 export async function getAsistenciasbyId(id) {
-  const url = 'https://192.168.2.8/api/Matronas/Asistencias/' + id
+  const url = uri + 'Asistencias/' + id
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -394,7 +402,7 @@ export async function getAsistenciasbyId(id) {
 }
 
 export async function addAsistencias(user) {
-  const url = 'https://192.168.2.8/api/Matronas/Asistencias/Agrega'
+  const url = uri + 'Asistencias/Agrega'
 	const resp = await fetch(url, {
 		method: 'POST',
 		credentials: "same-origin",
@@ -410,7 +418,7 @@ export async function addAsistencias(user) {
 }
 
 export async function modifyAsistencias(user) {
-  const url = 'https://192.168.2.8/api/Matronas/Asistencias/Actualiza/' + user.idUsuario
+  const url = uri + 'Asistencias/Actualiza/' + user.idUsuario
 	const resp = await fetch(url, {
 		method: 'PUT',
 		credentials: "same-origin",
@@ -425,7 +433,7 @@ export async function modifyAsistencias(user) {
 }
 
 export async function deleteAsistencias(id) {
-  const url = 'https://192.168.2.8/api/Matronas/Asistencias/Elimina/' + id
+  const url = uri + 'Asistencias/Elimina/' + id
 	const resp = await fetch(url, {
 		method: 'DELETE',
 		credentials: "same-origin",
@@ -441,7 +449,7 @@ export async function deleteAsistencias(id) {
 }
 
 export async function getClases() {
-  const url = 'https://192.168.2.8/api/Matronas/Clases/'
+  const url = uri + 'Clases/'
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -460,7 +468,7 @@ export async function getClases() {
 }
 
 export async function getClasesbyId(id) {
-  const url = 'https://192.168.2.8/api/Matronas/Clases/' + id
+  const url = uri + 'Clases/' + id
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -479,7 +487,7 @@ export async function getClasesbyId(id) {
 }
 
 export async function addClases(user) {
-  const url = 'https://192.168.2.8/api/Matronas/Clases/Agrega'
+  const url = uri + 'Clases/Agrega'
 	const resp = await fetch(url, {
 		method: 'POST',
 		credentials: "same-origin",
@@ -495,7 +503,7 @@ export async function addClases(user) {
 }
 
 export async function modifyClases(user) {
-  const url = 'https://192.168.2.8/api/Matronas/Clases/Actualiza/' + user.idUsuario
+  const url = 'https:uri + /Actualiza/' + user.idUsuario
 	const resp = await fetch(url, {
 		method: 'PUT',
 		credentials: "same-origin",
@@ -510,7 +518,7 @@ export async function modifyClases(user) {
 }
 
 export async function deleteClases(id) {
-  const url = 'https://192.168.2.8/api/Matronas/Clases/Elimina/' + id
+  const url = 'https:uri + /Elimina/' + id
 	const resp = await fetch(url, {
 		method: 'DELETE',
 		credentials: "same-origin",
@@ -526,7 +534,7 @@ export async function deleteClases(id) {
 }
 
 export async function getEmbarazadas() {
-  const url = 'https://192.168.2.8/api/Matronas/Embarazadas/'
+  const url = uri + 'Embarazadas/'
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -547,7 +555,7 @@ export async function getEmbarazadas() {
 }
 
 export async function getEmbarazadasbyId(id) {
-  const url = 'https://192.168.2.8/api/Matronas/Embarazadas/' + id
+  const url = uri + 'Embarazadas/' + id
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -568,7 +576,7 @@ export async function getEmbarazadasbyId(id) {
 }
 
 export async function addEmbarazadas(user) {
-  const url = 'https://192.168.2.8/api/Matronas/Embarazadas/Agrega'
+  const url = uri + 'Embarazadas/Agrega'
 	const resp = await fetch(url, {
 		method: 'POST',
 		credentials: "same-origin",
@@ -584,7 +592,7 @@ export async function addEmbarazadas(user) {
 }
 
 export async function modifyEmbarazadas(user) {
-  const url = 'https://192.168.2.8/api/Matronas/Embarazadas/Actualiza/' + user.idUsuario
+  const url = uri + 'Embarazadas/Actualiza/' + user.idUsuario
 	const resp = await fetch(url, {
 		method: 'PUT',
 		credentials: "same-origin",
@@ -599,7 +607,7 @@ export async function modifyEmbarazadas(user) {
 }
 
 export async function deleteEmbarazadas(id) {
-  const url = 'https://192.168.2.8/api/Matronas/Embarazadas/Elimina/' + id
+  const url = uri + 'Embarazadas/Elimina/' + id
 	const resp = await fetch(url, {
 		method: 'DELETE',
 		credentials: "same-origin",
@@ -615,7 +623,7 @@ export async function deleteEmbarazadas(id) {
 }
 
 export async function getMatronas() {
-  const url = 'https://192.168.2.8/api/Matronas/Matronas/'
+  const url = uri + 'Matronas/'
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -635,7 +643,7 @@ export async function getMatronas() {
 }
 
 export async function getMatronasbyId(id) {
-  const url = 'https://192.168.2.8/api/Matronas/Matronas/' + id
+  const url = uri + 'Matronas/' + id
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -655,7 +663,7 @@ export async function getMatronasbyId(id) {
 }
 
 export async function addMatronas(user) {
-  const url = 'https://192.168.2.8/api/Matronas/Matronas/Agrega'
+  const url = uri + 'Matronas/Agrega'
 	const resp = await fetch(url, {
 		method: 'POST',
 		credentials: "same-origin",
@@ -671,7 +679,7 @@ export async function addMatronas(user) {
 }
 
 export async function modifyMatronas(user) {
-  const url = 'https://192.168.2.8/api/Matronas/Matronas/Actualiza/' + user.idUsuario
+  const url = uri + 'Matronas/Actualiza/' + user.idUsuario
 	const resp = await fetch(url, {
 		method: 'PUT',
 		credentials: "same-origin",
@@ -686,7 +694,7 @@ export async function modifyMatronas(user) {
 }
 
 export async function deleteMatronas(id) {
-  const url = 'https://192.168.2.8/api/Matronas/Matronas/Elimina/' + id
+  const url = uri + 'Matronas/Elimina/' + id
 	const resp = await fetch(url, {
 		method: 'DELETE',
 		credentials: "same-origin",
@@ -702,7 +710,7 @@ export async function deleteMatronas(id) {
 }
 
 export async function getCentros() {
-  const url = 'https://192.168.2.8/api/Matronas/Centros/'
+  const url = uri + 'Centros/'
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -722,7 +730,7 @@ export async function getCentros() {
 }
 
 export async function getCentrosbyId(id) {
-  const url = 'https://192.168.2.8/api/Matronas/Centros/' + id
+  const url = uri + 'Centros/' + id
 	const resp = await fetch(url, {
 		method: 'GET'
 	})
@@ -742,7 +750,7 @@ export async function getCentrosbyId(id) {
 }
 
 export async function addCentros(user) {
-  const url = 'https://192.168.2.8/api/Matronas/Centros/Agrega'
+  const url = uri + 'Centros/Agrega'
 	const resp = await fetch(url, {
 		method: 'POST',
 		credentials: "same-origin",
@@ -758,7 +766,7 @@ export async function addCentros(user) {
 }
 
 export async function modifyCentros(user) {
-  const url = 'https://192.168.2.8/api/Matronas/Centros/Actualiza/' + user.idUsuario
+  const url = uri + 'Centros/Actualiza/' + user.idUsuario
 	const resp = await fetch(url, {
 		method: 'PUT',
 		credentials: "same-origin",
@@ -773,7 +781,7 @@ export async function modifyCentros(user) {
 }
 
 export async function deleteCentros(id) {
-  const url = 'https://192.168.2.8/api/Matronas/Centros/Elimina/' + id
+  const url = uri + 'Centros/Elimina/' + id
 	const resp = await fetch(url, {
 		method: 'DELETE',
 		credentials: "same-origin",
