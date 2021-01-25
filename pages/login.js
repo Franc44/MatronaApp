@@ -80,10 +80,9 @@ export default function Login() {
       //expiresDate.setDate(expiresDate.getDate() + 7)
 
       authSession(data).then(res => {
-        console.log(res)
         if(res.status < 400) {
-          const data = res.data
-          //console.log(data);
+          const data = res.data;
+          console.log(data);
           signIn(data.usuario, data.nombre, data.tipo, data.id);
           //cookieCutter.set('usu', data.usuario, {expires: expiresDate, path: '/'})
           //cookieCutter.set('Nombre', data.nombre, {expires: expiresDate, path: '/'})

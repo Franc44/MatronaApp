@@ -12,8 +12,15 @@ export async function authSession(session) {
 		},
 		body: JSON.stringify(session)
 	})
-	const data = await resp.text()
-	//console.log(data);
+
+	var data = null;
+
+	if (resp.status == 200) {
+		data = await resp.json()
+	}
+	else{
+		data = await resp.text()
+	}
 	
   return {data: data, status: resp.status}
 }
@@ -27,7 +34,7 @@ export async function getUsuarios() {
 	if(resp.ok) {
 		const data = await resp.json()
 
-		console.log(data);
+		//console.log(data);
 	
 	 	return data.map(
 			usuario => {
@@ -72,25 +79,24 @@ export async function addUsuario(user) {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(data)
+		body: JSON.stringify(user)
 	})
-	const data = await resp.json()
-	console.log(data);
 	
   return resp
 }
 
 export async function modifyUsuario(user) {
-  const url = uri + 'Usuario/Actualiza/' + user.idUsuario
+  const url = uri + 'Usuario/Actualiza/' + user.idUsuario;
+  const body = JSON.stringify(user);
+  console.log(body);
 	const resp = await fetch(url, {
 		method: 'PUT',
 		credentials: "same-origin",
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(data)
+		body: body
 	})
-	const data = await resp.json()
 	
   	return resp
 }
@@ -102,13 +108,10 @@ export async function deleteUsuario(id) {
 		credentials: "same-origin",
 		headers: {
 			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(data)
+		}
 	})
-	const data = await resp.json()
-	console.log(data);
 	
-  return {data: data, status: resp.status}
+  return resp
 }
 
 export async function getClaseE() {
